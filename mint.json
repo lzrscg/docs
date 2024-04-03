@@ -53,17 +53,30 @@
       "pages": ["hackathon"]
     },
     {
+      "group": "Move",
+      "pages": [
+        "api-reference/move/blocks/get-blocks-by-height",
+        "api-reference/move/blocks/get-blocks-by-version",
+        "api-reference/move/transactions/get-account-transactions",
+        "api-reference/move/transactions/get-transaction-by-hash",
+        "api-reference/move/transactions/get-transaction-by-version",
+        "api-reference/move/transactions/get-transactions",
+        "api-reference/move/events/get-events-by-creation-number",
+        "api-reference/move/events/get-events-by-event-handle"
+      ]
+    },
+    {
       "group": "EVM",
       "pages": [
-        "api-reference/account-apis/return-token-balances-by-address",
-        "api-reference/account-apis/return-transactions-by-address",
-        "api-reference/account-apis/return-transfer-events-by-address",
-        "api-reference/contract-apis/describe-contract-by-address",
-        "api-reference/contract-apis/return-logs-by-contract-address",
-        "api-reference/erc20-token-apis/return-owners-by-erc20-token-address",
-        "api-reference/erc20-token-apis/return-transfer-events-by-erc20-token-address",
-        "api-reference/nft-apis/return-owners-by-nft-address",
-        "api-reference/nft-apis/return-collections-by-nft-address"
+        "api-reference/evm/account-apis/return-token-balances-by-address",
+        "api-reference/evm/account-apis/return-transactions-by-address",
+        "api-reference/evm/account-apis/return-transfer-events-by-address",
+        "api-reference/evm/contract-apis/describe-contract-by-address",
+        "api-reference/evm/contract-apis/return-logs-by-contract-address",
+        "api-reference/evm/erc20-token-apis/return-owners-by-erc20-token-address",
+        "api-reference/evm/erc20-token-apis/return-transfer-events-by-erc20-token-address",
+        "api-reference/evm/nft-apis/return-owners-by-nft-address",
+        "api-reference/evm/nft-apis/return-collections-by-nft-address"
       ]
     }
   ],
@@ -71,5 +84,5 @@
     "twitter": "https://twitter.com/modularcloud1",
     "github": "https://github.com/modularcloud"
   },
-  "openapi": ["/evm.yaml"]
+  "openapi": ["/evm.yaml", "/aptos.json"]
 }
