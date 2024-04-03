@@ -90,5 +90,8 @@
     "twitter": "https://twitter.com/modularcloud1",
     "github": "https://github.com/modularcloud"
   },
-  "openapi": ["/evm.yaml", "/aptos.json"]
+  "openapi": ["/evm.yaml", "/aptos.json"],
+  "integrations": {
+    "front": "219849af862c597d17f2ef550b51fee1"
+  }
 }
