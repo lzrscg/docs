@@ -53,6 +53,12 @@
       "pages": ["hackathon"]
     },
     {
+      "group": "Overview",
+      "pages": [
+        "api-reference/start-here"
+      ]
+    },
+    {
       "group": "Move",
       "pages": [
         "api-reference/move/blocks/get-blocks-by-height",
