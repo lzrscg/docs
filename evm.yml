@@ -1,0 +1,681 @@
+openapi: 3.0.1
+info:
+  title: EVM APIs
+  version: 1.0.0
+  description: |
+    ## EVM APIs supported by Modular Cloud. <br>
+    <br>
+    **Warning!** The APIs are still in the preview phase and are subject to change.
+    <br>
+    <br>
+    #### ChainId
+    * Nautilus Mainnet: 5bff799d-8a1f-47a1-81fd-40d65dcbdf16
+    * Worlds Devnet: abb8f780-d3e2-49a2-9353-dec586a4cf88
+    
+externalDocs:
+  description: Modualr Cloud document homepage
+  url: https://docs.modular.cloud/
+servers:
+- url: https://evm.preview-api.modular.cloud/v1
+
+x-amazon-apigateway-request-validators:
+  all:
+    validateRequestBody: true
+    validateRequestParameters: true
+x-amazon-apigateway-request-validator: all
+x-showExtensions: false
+
+tags:
+  - name: Account APIs
+     
+  - name: Contract APIs
+  
+  - name: ERC20 Token APIs
+   
+  - name: NFT APIs
+    
+paths:
+  /chain/{chain-id}/account/{account-address}/token-transfer-events:
+    parameters:
+    - $ref: '#/components/parameters/chain-id'
+    - $ref: '#/components/parameters/account-address'
+    - $ref: '#/components/parameters/maxResults'
+    - $ref: '#/components/parameters/nextToken'
+    - $ref: '#/components/parameters/tokenEventType'
+    get:
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        uri: ${integration_uri}
+        httpMethod: POST
+      operationId: listAccountTokenTransferEvents
+      summary: Return a list of token transfer events for a given account address
+      tags: 
+        - Account APIs
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAccountTokenTransferEventsResponse'
+  /chain/{chain-id}/account/{account-address}/transactions:
+    parameters:
+    - $ref: '#/components/parameters/chain-id'
+    - $ref: '#/components/parameters/account-address'
+    - $ref: '#/components/parameters/maxResults'
+    - $ref: '#/components/parameters/nextToken'   
+    get:
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        uri: ${integration_uri}
+        httpMethod: POST
+      operationId: listAccountTransactions
+      summary: Return a list of transactions for a given account address
+      tags: 
+        - Account APIs
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAccountTransactionsResponse'
+  /chain/{chain-id}/account/{account-address}/token-balances:
+    parameters:
+    - $ref: '#/components/parameters/chain-id'
+    - $ref: '#/components/parameters/account-address'
+    - $ref: '#/components/parameters/maxResults'
+    - $ref: '#/components/parameters/nextToken'
+    - $ref: '#/components/parameters/tokenType'
+    get:
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        uri: ${integration_uri}
+        httpMethod: POST
+      operationId: listAccountTokenBalances
+      summary: Return a list of token balances (ERC20/NFT/NATIVE) for a given account address
+      tags: 
+        - Account APIs      
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAccountTokenBalancesResponse'
+  /chain/{chain-id}/contract/{contract-address}:
+    parameters:
+    - $ref: '#/components/parameters/chain-id'
+    - $ref: '#/components/parameters/contract-address'
+    get:
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        uri: ${integration_uri}
+        httpMethod: POST
+      operationId: describeContract
+      summary: Describe a contract for a given contract address
+      tags: 
+        - Contract APIs      
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeContractResponse'
+  /chain/{chain-id}/contract/{contract-address}/logs:
+    parameters:
+    - $ref: '#/components/parameters/chain-id'
+    - $ref: '#/components/parameters/contract-address'
+    - $ref: '#/components/parameters/maxResults'
+    - $ref: '#/components/parameters/nextToken'
+    get:
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        uri: ${integration_uri}
+        httpMethod: POST
+      operationId: listContractLogs
+      summary: Return a list of contract logs for a given contract address
+      tags: 
+        - Contract APIs       
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListContractLogsResponse'
+  /chain/{chain-id}/erc20-token/{token-address}/token-transfer-events:
+    parameters:
+    - $ref: '#/components/parameters/chain-id'
+    - $ref: '#/components/parameters/token-address'
+    - $ref: '#/components/parameters/maxResults'
+    - $ref: '#/components/parameters/nextToken'
+    get:
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        uri: ${integration_uri}
+        httpMethod: POST
+      operationId: listERC20TokenTransferEvents
+      summary: Return a list of token transfer events for a given erc20 token address
+      tags: 
+        - ERC20 Token APIs   
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListERC20TokenTransferEventsResponse'
+  /chain/{chain-id}/erc20-token/{token-address}/owners:
+    parameters:
+    - $ref: '#/components/parameters/chain-id'
+    - $ref: '#/components/parameters/token-address'
+    - $ref: '#/components/parameters/maxResults'
+    - $ref: '#/components/parameters/nextToken'
+    get:
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        uri: ${integration_uri}
+        httpMethod: POST
+      operationId: listERC20TokenOwners
+      summary: Return a list of token owners for a given erc20 token address
+      tags: 
+        - ERC20 Token APIs         
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListERC20TokenOwnersResponse'
+  /chain/{chain-id}/nft/{token-address}/collection:
+    parameters:
+    - $ref: '#/components/parameters/chain-id'
+    - $ref: '#/components/parameters/token-address'
+    - $ref: '#/components/parameters/maxResults'
+    - $ref: '#/components/parameters/nextToken'
+    get:
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        uri: ${integration_uri}
+        httpMethod: POST
+      operationId: listNFTCollection
+      summary: Return a list of nft collection for a given nft address
+      tags: 
+        - NFT APIs         
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNFTCollectionResponse'
+  /chain/{chain-id}/nft/{token-address}/{token-id}/owners:
+    parameters:
+    - $ref: '#/components/parameters/chain-id'
+    - $ref: '#/components/parameters/token-address'
+    - $ref: '#/components/parameters/token-id'
+    - $ref: '#/components/parameters/maxResults'
+    - $ref: '#/components/parameters/nextToken'
+    get:
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        uri: ${integration_uri}
+        httpMethod: POST
+      operationId: listNFTOwners
+      summary: Return a list of nft owners for a given nft address
+      tags: 
+        - NFT APIs      
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNFTOwnersResponse'
+
+components:
+  schemas:
+    ListAccountTokenTransferEventsResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/ListAccountTokenTransferEventsResult'
+        error:
+          $ref: '#/components/schemas/Error'
+    ListAccountTransactionsResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/ListAccountTransactionsResult'
+        error:
+          $ref: '#/components/schemas/Error'
+    ListAccountTokenBalancesResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/ListAccountTokenBalancesResult'
+        error:
+          $ref: '#/components/schemas/Error'
+    DescribeContractResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/DescribeContractResult'
+        error:
+          $ref: '#/components/schemas/Error'
+    ListContractLogsResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/ListContractLogsResult'
+        error:
+          $ref: '#/components/schemas/Error'
+    ListERC20TokenTransferEventsResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/ListERC20TokenTransferEventsResult'
+        error:
+          $ref: '#/components/schemas/Error'
+    ListERC20TokenOwnersResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/ListERC20TokenOwnersResult'
+        error:
+          $ref: '#/components/schemas/Error'
+    ListNFTCollectionResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/ListNFTCollectionResult'
+        error:
+          $ref: '#/components/schemas/Error'
+    ListNFTOwnersResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/ListNFTOwnersResult'
+        error:
+          $ref: '#/components/schemas/Error'
+    ListAccountTokenTransferEventsResult:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      required:
+        - events     
+    ListAccountTransactionsResult:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      required:
+        - transactions
+    NextToken:
+      type: string
+    BlockNumber: 
+      type: string
+    Transaction:
+      type: object
+      properties:
+        hash:
+          type: string
+          nullable: true
+        blockNumber:
+          type: string
+          nullable: true
+      required:
+        - hash
+        - blockNumber
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+    ListAccountTokenBalancesResult:
+      type: object
+      properties:
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Balance'
+        nativeTokenBalance:
+          type: string
+      required:
+        - balances
+    
+    Balance:
+      type: object
+      properties:
+        tokenType:
+          type: string
+          enum:
+            - ERC20
+            - ERC721
+            - ERC1155
+        data:
+          $ref: '#/components/schemas/TokenBalance'
+      required:
+        - tokenType
+        - data
+
+    TokenBalance:
+      oneOf:
+        - $ref: '#/components/schemas/ERC20TokenBalanceData'
+        - $ref: '#/components/schemas/ERC721TokenBalanceData'
+        - $ref: '#/components/schemas/ERC1155TokenBalanceData'
+  
+    ERC721TokenBalanceData:
+      type: object
+      properties:
+        tokenData:
+          $ref: '#/components/schemas/ERC721Token'
+        tokenBalance:
+          $ref: '#/components/schemas/ERC721TokenBalance'
+      required:
+        - tokenData
+        - tokenBalance
+
+    ERC721Token:
+      type: object
+      properties:
+        address:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+      required:
+        - address
+
+    ERC721TokenBalance:
+      type: object
+      properties:
+        tokenId:
+          type: string
+        tokenUri:
+          type: string
+      required:
+        - tokenId
+
+    ERC1155TokenBalanceData:
+      type: object
+      properties:
+        tokenData:
+          $ref: '#/components/schemas/ERC1155Token'
+        tokenBalance:
+          $ref: '#/components/schemas/ERC1155TokenBalance'
+      required:
+        - tokenData
+        - tokenBalance
+
+    ERC1155Token:
+      type: object
+      properties:
+        address:
+          type: string
+      required:
+        - address
+
+    ERC1155TokenBalance:
+      type: object
+      properties:
+        tokenId:
+          type: string
+        tokenUri:
+          type: string
+        value:
+          type: string
+      required:
+        - tokenId
+
+    ERC20TokenBalanceData:
+      type: object
+      properties:
+        tokenData:
+          $ref: '#/components/schemas/ERC20Token'
+        tokenBalance:
+          $ref: '#/components/schemas/ERC20TokenBalance'
+      required:
+        - tokenData
+        - tokenBalance
+
+    ERC20Token:
+      type: object
+      properties:
+        address:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+        decimals:
+          type: integer
+          format: int32
+      required:
+        - address
+
+    ERC20TokenBalance:
+      type: object
+      properties:
+        value:
+          type: string
+    DescribeContractResult:
+      type: object
+      properties:
+        contract:
+          $ref: '#/components/schemas/Contract'
+    Contract:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - ERC20
+            - ERC721
+            - ERC1155
+            - NA
+        address:
+          type: string
+        creationTransactionHash:
+          type: string
+          nullable: true
+    ListContractLogsResult:
+      type: object
+      properties:
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractLog'
+        nextToken:
+          type: string
+      required:
+        - logs
+    ContractLog:
+      type: object
+      properties:
+        transactionHash:
+          type: string
+        logIndex:
+          type: integer
+        blockNumber:
+          $ref: '#/components/schemas/BlockNumber'
+      required:
+        - transactionHash
+        - logIndex
+        - blockNumber
+    ListERC20TokenTransferEventsResult:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        nextToken:
+          type: string
+      required:
+        - events
+    Event:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - ERC20_TRANSFER
+            - ERC721_TRANSFER
+            - ERC1155_TRANSFER
+        transactionHash:
+          type: string
+        logIndex:
+          type: integer
+          format: int32
+        blockNumber:
+          type: string
+      required:
+        - eventType
+        - transactionHash
+        - logIndex
+        - blockNumber
+    ListERC20TokenOwnersResult:
+      type: object
+      properties:
+        owners:
+          type: array
+          items:
+            $ref: '#/components/schemas/ERC20Owner'
+        nextToken:
+          type: string
+      required:
+        - owners
+    ERC20Owner:
+      type: object
+      properties:
+        address:
+          type: string
+        balance:
+          type: string
+      required:
+        - address
+        - balance 
+    ListNFTCollectionResult:
+      type: object
+      properties:
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/NFT'
+        nextToken:
+          type: string
+      required:
+        - tokens
+    NFT:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+        - id
+    ListNFTOwnersResult:
+      type: object
+      properties:
+        owners:
+          type: array
+          items:
+            $ref: '#/components/schemas/NFTOwner'
+        nextToken:
+          type: string
+      required:
+        - owners
+    NFTOwner:
+      type: object
+      properties:
+        address:
+          type: string
+        balance:
+          $ref: '#/components/schemas/NFTOwnerBalance'
+      required:
+        - address
+        - balance
+    NFTOwnerBalance:
+      type: object
+      properties:
+        tokenId:
+          type: string
+        value:
+          type: string
+      required:
+        - tokenId
+        - value
+  parameters:
+    maxResults:
+      name: maxResults
+      in: query 
+      required: false
+      schema:
+        type: integer
+      description: default is 30
+    nextToken:
+      name: nextToken
+      in: query
+      required: false
+      schema:
+        type: string
+    tokenEventType:
+      name: tokenEventType
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - ERC20_TRANSFER
+          - NFT_TRANSFER
+    tokenType:
+      name: tokenType
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - ERC20
+          - NFT
+    chain-id:
+      name: chain-id
+      in: path
+      required: true
+      schema:
+        type: string
+    account-address:
+      name: account-address
+      in: path
+      required: true
+      schema:
+        type: string
+    contract-address:
+      name: contract-address
+      in: path
+      required: true
+      schema:
+        type: string      
+    token-address:
+      name: token-address
+      in: path
+      required: true
+      schema:
+        type: string 
+    token-id:
+      name: token-id
+      in: path
+      required: true
+      schema:
+        type: string

@@ -8,12 +8,12 @@
   "modeToggle": {
     "default": "light",
     "isHidden": true
-  },  
+  },
   "favicon": "/App.svg",
   "colors": {
     "primary": "#0075FB",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "light": "#0075FB",
+    "dark": "#0091FB",
     "anchors": {
       "from": "#0075FB",
       "to": "#0091FB"
@@ -25,6 +25,10 @@
       "url": "https://cal.com/lzrs/office-hours"
     }
   ],
+  "topbarCtaButton": {
+    "type": "github",
+    "url": "https://github.com/modularcloud/explorer"
+  },
   "anchors": [
     {
       "name": "Explorer",
@@ -37,16 +41,35 @@
       "url": "https://t.me/modularcloud"
     }
   ],
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
   "navigation": [
     {
       "group": "Get Started",
+      "pages": ["hackathon"]
+    },
+    {
+      "group": "EVM",
       "pages": [
-        "hackathon"
+        "api-reference/account-apis/return-token-balances-by-address",
+        "api-reference/account-apis/return-transactions-by-address",
+        "api-reference/account-apis/return-transfer-events-by-address",
+        "api-reference/contract-apis/describe-contract-by-address",
+        "api-reference/contract-apis/return-logs-by-contract-address",
+        "api-reference/erc20-token-apis/return-owners-by-erc20-token-address",
+        "api-reference/erc20-token-apis/return-transfer-events-by-erc20-token-address",
+        "api-reference/nft-apis/return-owners-by-nft-address",
+        "api-reference/nft-apis/return-collections-by-nft-address"
       ]
     }
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/modularcloud1",
     "github": "https://github.com/modularcloud"
-  }
+  },
+  "openapi": ["/evm.yaml"]
 }
