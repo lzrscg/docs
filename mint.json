@@ -53,6 +53,10 @@
       "pages": ["hackathon"]
     },
     {
+      "group": "Miscellaneous",
+      "pages": ["brand-guidelines"]
+    },
+    {
       "group": "Overview",
       "pages": ["vm-api/start-here"]
     },
