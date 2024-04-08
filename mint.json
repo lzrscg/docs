@@ -95,5 +95,8 @@
   "openapi": ["/evm.yaml", "/aptos.json"],
   "integrations": {
     "frontchat": "219849af862c597d17f2ef550b51fee1"
+  },
+  "feedback": {
+    "thumbsRating": true
   }
 }
